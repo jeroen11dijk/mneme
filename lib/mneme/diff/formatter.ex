@@ -240,9 +240,11 @@ defmodule Mneme.Diff.Formatter do
 
   # blocks don't have user-visible delimiters to highlight
   defp to_fmt_instructions(:delimiter, _op, {{:__block__, _meta, _args}, _}), do: []
+  defp to_fmt_instructions(:delimiter, _op, {{:__block__, _meta, _args} = node, _zipper}), do: []
 
   # final fallback for any other shapes we don't explicitly handle
   defp to_fmt_instructions(:delimiter, _op, {_unknown, _}), do: []
+  defp to_fmt_instructions(:delimiter, _op, _), do: []
 
   defp delimiter_to_fmt_instructions(op, meta, start_len, end_len) do
     case meta do
